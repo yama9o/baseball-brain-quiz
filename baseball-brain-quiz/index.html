@@ -6,16 +6,20 @@
     <title>ミーア教授の「野球脳」レベル診断</title>
     <style>
         :root {
-            /* ミーア教授カラー */
-            --bg-color: #0f1c3f; /* ディープネイビー */
-            --text-color: #f0e6d2; /* ベージュ */
-            --accent-color: #d4a017; /* ゴールド/イエロー */
-            --btn-color: #c0392b; /* 野球のステッチレッド */
+            /* Clever Prayers Brand Colors */
+            --bg-navy: #0f1c3f;    /* 学長のスーツ色 */
+            --text-gold: #d4a017;  /* 金ボタン・装飾 */
+            --text-beige: #f0e6d2; /* 教授の毛並み・紙 */
+            --accent-red: #c0392b; /* 野球のステッチ */
+            --board-green: #254030;/* 黒板っぽい深緑（アクセント） */
         }
+
         body {
-            font-family: "Helvetica Neue", Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", sans-serif;
+            background-color: var(--bg-navy);
+            background-image: 
+                radial-gradient(circle at 50% 50%, #1a2b55 0%, #0f1c3f 100%); /* 立体感 */
+            color: var(--text-beige);
             margin: 0;
             padding: 20px;
             display: flex;
@@ -24,117 +28,224 @@
             min-height: 100vh;
             text-align: center;
         }
+
         .container {
             max-width: 600px;
             width: 100%;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(15, 28, 63, 0.95);
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            border: 4px double var(--text-gold); /* 高級感のある二重線 */
+            position: relative;
+            overflow: hidden;
         }
-        h1 {
-            color: var(--accent-color);
+
+        /* 装飾的な四隅の金具風デザイン */
+        .container::before, .container::after {
+            content: "✦";
+            position: absolute;
+            color: var(--text-gold);
             font-size: 24px;
+            opacity: 0.8;
+        }
+        .container::before { top: 10px; left: 15px; }
+        .container::after { top: 10px; right: 15px; }
+
+        .logo-area {
             margin-bottom: 20px;
         }
-        .icon {
-            width: 100px;
-            height: 100px;
-            background-color: #ddd;
+
+        .prof-icon {
+            width: 110px;
+            height: 110px;
+            background-color: #fff;
             border-radius: 50%;
-            margin: 0 auto 20px;
+            margin: 0 auto 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 40px;
-            border: 3px solid var(--accent-color);
-            /* ここに教授の画像URLを入れると最高です */
+            font-size: 50px;
+            border: 4px solid var(--text-gold);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            overflow: hidden;
+            background-image: url('https://placehold.jp/3d4070/ffffff/150x150.png?text=Professor'); /* 仮画像 */
+            background-size: cover;
         }
+        
+        /* 実際の画像を反映する場合は、styleタグ内の上の行を消して、
+           HTMLのimgタグを使うか、ここにご自身の画像URLを入れてください */
+
+        h1 {
+            color: var(--text-gold);
+            font-size: 22px;
+            margin-bottom: 5px;
+            letter-spacing: 0.05em;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+        }
+
+        .sub-title {
+            font-size: 14px;
+            color: #aaa;
+            margin-bottom: 25px;
+            font-weight: normal;
+        }
+
+        .progress {
+            font-family: 'Courier New', monospace;
+            color: var(--text-gold);
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
         .question-box {
             font-size: 18px;
-            line-height: 1.6;
-            margin-bottom: 30px;
-            min-height: 80px;
+            line-height: 1.7;
+            margin-bottom: 35px;
+            min-height: 90px;
             display: flex;
             align-items: center;
             justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid var(--accent-red);
         }
+
         .options {
             display: flex;
             gap: 15px;
             justify-content: center;
         }
+
         button {
-            padding: 15px 30px;
-            font-size: 18px;
+            padding: 16px 0;
+            font-size: 16px;
             border: none;
             border-radius: 50px;
             cursor: pointer;
             font-weight: bold;
-            transition: transform 0.1s;
-            width: 100%;
-            max-width: 200px;
+            transition: all 0.2s;
+            width: 48%;
+            box-shadow: 0 4px 0 rgba(0,0,0,0.2);
         }
+
         button:active {
-            transform: scale(0.95);
+            transform: translateY(2px);
+            box-shadow: 0 1px 0 rgba(0,0,0,0.2);
         }
+
         .btn-yes {
-            background-color: var(--accent-color);
-            color: var(--bg-color);
+            background: linear-gradient(135deg, #d4a017 0%, #f1c40f 100%);
+            color: #0f1c3f;
         }
+
         .btn-no {
-            background-color: #555;
-            color: white;
+            background-color: #4a5568;
+            color: #e2e8f0;
         }
-        .btn-restart {
-            background-color: var(--btn-color);
-            color: white;
-            margin-top: 20px;
-        }
+
+        /* 結果画面のスタイル */
         .result-area {
             display: none;
-            animation: fadeIn 0.5s;
+            animation: fadeIn 0.6s ease-out;
         }
+
+        .result-rank {
+            font-size: 16px;
+            color: #ccc;
+            margin-bottom: 5px;
+        }
+
         .result-title {
-            font-size: 28px;
+            font-size: 26px;
             font-weight: bold;
-            color: var(--accent-color);
-            margin-bottom: 15px;
+            color: var(--text-gold);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed rgba(212, 160, 23, 0.3);
         }
+
         .result-desc {
             font-size: 16px;
-            margin-bottom: 25px;
+            line-height: 1.8;
+            margin-bottom: 30px;
             text-align: left;
-            background: rgba(0,0,0,0.3);
-            padding: 15px;
+            background: rgba(0,0,0,0.2);
+            padding: 20px;
             border-radius: 10px;
         }
-        .line-btn {
-            background-color: #06c755;
-            color: white;
-            text-decoration: none;
+
+        /* 誘導ボタン（CTA）のデザイン */
+        .cta-btn {
             display: block;
-            padding: 15px;
-            border-radius: 10px;
+            padding: 18px;
+            border-radius: 12px;
             font-weight: bold;
-            margin-top: 10px;
+            text-decoration: none;
+            margin-top: 15px;
+            font-size: 18px;
+            color: white;
+            transition: transform 0.2s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
         }
+        
+        .cta-btn:hover {
+            transform: scale(1.02);
+        }
+
+        /* Instagram用ボタン */
+        .btn-insta {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
+        }
+
+        /* note用ボタン */
+        .btn-note {
+            background-color: #2cb696; /* noteグリーン */
+            border-bottom: 4px solid #1a8a71;
+        }
+
+        .btn-restart {
+            background: transparent;
+            color: #888;
+            border: 1px solid #555;
+            margin-top: 25px;
+            width: auto;
+            padding: 10px 20px;
+            font-size: 14px;
+            box-shadow: none;
+        }
+
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* スマホ調整 */
+        @media (max-width: 400px) {
+            h1 { font-size: 20px; }
+            .question-box { font-size: 16px; }
         }
     </style>
 </head>
 <body>
 
 <div class="container" id="quiz-container">
-    <div class="icon"><img src="images/mia.png" style="width:100%; height:100%; border-radius:50%;"></div>
-    <h1>ミーア教授の<br>野球脳レベル診断</h1>
-    <div class="progress">Q. <span id="current-q">1</span> / 10</div>
-    <div class="question-box" id="question-text">
-        準備はいいか？正直に答えるのじゃ！
+    <div class="logo-area">
+        <div class="prof-icon">🦉</div> 
     </div>
+    
+    <h1>ボールブレインアカデミー<br>入塾試験（診断）</h1>
+    <div class="sub-title">〜 キミの「野球脳」は通用するか？ 〜</div>
+
+    <div class="progress">QUESTION <span id="current-q">1</span>/10</div>
+    
+    <div class="question-box" id="question-text">
+        ロード中...
+    </div>
+    
     <div class="options">
         <button class="btn-no" onclick="nextQuestion(false)">いいえ</button>
         <button class="btn-yes" onclick="nextQuestion(true)">はい</button>
@@ -142,18 +253,28 @@
 </div>
 
 <div class="container result-area" id="result-container">
-    <div class="icon"><img src="images/mia.png" style="width:100%; height:100%; border-radius:50%;"></div>
-    <h1>診断結果発表！</h1>
-    <div id="result-content"></div>
+    <div class="logo-area">
+        <div class="prof-icon">🎓</div>
+    </div>
     
-    <a href="#" class="line-btn">
-        👉 アカデミーに入学する<br>(LINE登録で解説を受け取る)
-    </a>
-    <button class="btn-restart" onclick="location.reload()">もう一度診断する</button>
+    <div id="result-content"></div>
+
+    <div id="cta-area"></div>
+
+    <button class="btn-restart" onclick="location.reload()">↺ 最初から診断する</button>
 </div>
 
 <script>
-    // 診断データ（先ほど決めた内容）
+    // ▼▼▼ 設定エリア：あなたのURLに書き換えてください ▼▼▼
+    
+    // ★レベル1・2の人（Instagramへ誘導）
+    const INSTAGRAM_URL = "https://www.instagram.com/yama_baseballno/"; 
+    
+    // ★レベル3の人（noteへ誘導）
+    const NOTE_URL = "https://note.com/"; 
+
+    // ▲▲▲ 設定エリアここまで ▲▲▲
+
     const questions = [
         "ピッチャーが投げる前に「もしここに飛んできたら」をイメージできている？",
         "ランナー時、コーチャーだけでなく相手の守備位置を自分で確認している？",
@@ -175,21 +296,18 @@
     const questionText = document.getElementById('question-text');
     const currentQSpan = document.getElementById('current-q');
     const resultContent = document.getElementById('result-content');
+    const ctaArea = document.getElementById('cta-area');
 
     // 初期表示
     questionText.innerText = questions[0];
 
     function nextQuestion(isYes) {
         if (isYes) score++;
-        
         currentQuestionIndex++;
-
         if (currentQuestionIndex < questions.length) {
-            // 次の問題へ
             questionText.innerText = questions[currentQuestionIndex];
             currentQSpan.innerText = currentQuestionIndex + 1;
         } else {
-            // 結果表示へ
             showResult();
         }
     }
@@ -198,26 +316,49 @@
         quizContainer.style.display = 'none';
         resultContainer.style.display = 'block';
 
+        let rankText = "";
         let title = "";
         let desc = "";
+        let ctaButton = "";
 
+        // 診断ロジック
         if (score <= 3) {
-            title = "💀 レベル1：筋肉あやつり人形";
-            desc = "残念じゃが、キミは監督のロボットじゃ。<br>言われた通りに動くだけならAIの方がマシじゃぞ？<br>今のままではライバルに追い抜かれる運命じゃな。<br><br><strong>👉 今すぐ『Clever Prayers』に入学して、脳ミソを叩き直すのじゃ！</strong>";
+            // Level 1: Instagramへ
+            rankText = "ランク：C";
+            title = "💀 筋肉あやつり人形";
+            desc = "残念じゃが、キミは監督のロボットじゃ。<br>言われた通りに動くだけなら、AIの方がマシじゃぞ？<br>今のままではライバルに追い抜かれる運命じゃな。<br><br><strong>まずはInstagramで、基礎から脳ミソを叩き直すのじゃ！</strong>";
+            
+            ctaButton = `<a href="${INSTAGRAM_URL}" class="cta-btn btn-insta">📺 Instagramで学び直す</a>`;
+
         } else if (score <= 7) {
-            title = "🐣 レベル2：野球脳のつぼみ";
-            desc = "悪くはない。たまに良いプレーをするがムラがあるのう。<br>ピンチで頭が真っ白になってしまうことはないか？<br>「考える習慣」さえつけば、チームの要になれる素質ありじゃ。<br><br><strong>👉 アカデミーで「判断の根拠」を学べば、レギュラーは確実じゃ！</strong>";
+            // Level 2: Instagramへ
+            rankText = "ランク：B";
+            title = "🐣 野球脳のつぼみ";
+            desc = "悪くはない。たまに良いプレーをするがムラがあるのう。<br>ピンチで頭が真っ白になってしまうことはないか？<br>「考える習慣」さえつけば、チームの要になれる素質ありじゃ。<br><br><strong>アカデミー（Instagram）で毎日学べば、レギュラーは確実じゃ！</strong>";
+            
+            ctaButton = `<a href="${INSTAGRAM_URL}" class="cta-btn btn-insta">📺 Instagramで学び直す</a>`;
+
         } else {
-            title = "👑 レベル3：フィールドの指揮官";
-            desc = "見事じゃ！すでに「野球脳」の使い手かもしれん。<br>監督やコーチも一目置いているはずじゃ。<br>だが油断するな。上には上がいる。全国レベルの猛者と戦う準備はあるか？<br><br><strong>👉 さらなる高み（VIPコース）で、究極の戦術を語り合おう！</strong>";
+            // Level 3: noteへ
+            rankText = "ランク：S";
+            title = "👑 フィールドの指揮官";
+            desc = "見事じゃ！すでに「野球脳」の使い手かもしれん。<br>監督やコーチも一目置いているはずじゃ。<br>だが油断するな。上には上がいる。全国レベルの猛者と戦う準備はあるか？<br><br><strong>選ばれし者よ。秘密のnoteで究極の戦術を語り合おう！</strong>";
+            
+            ctaButton = `<a href="${NOTE_URL}" class="cta-btn btn-note">📝 野球脳を高める秘密のnoteで勉強する</a>`;
         }
 
+        // 結果の挿入
         resultContent.innerHTML = `
+            <div class="result-rank">${rankText}</div>
             <div class="result-title">${title}</div>
             <div class="result-desc">${desc}</div>
         `;
+        
+        // ボタンの挿入
+        ctaArea.innerHTML = ctaButton;
     }
 </script>
 
 </body>
 </html>
+
